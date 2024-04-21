@@ -49,3 +49,11 @@ CREATE TABLE users (
   data JSONB
 );
 ```
+
+## Demo
+
+
+
+https://github.com/ngviethoang/WebBrowserAssistantBot/assets/25498258/11c0127e-f818-4861-962d-7fc21becb6a0
+
+
