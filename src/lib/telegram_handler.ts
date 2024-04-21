@@ -1,6 +1,7 @@
 import { sendPhoto, sendMessage } from '@/lib/telegram';
 import { updateUser } from './user';
 import { validatePassword } from './auth';
+import { askChatbot } from './chatbot';
 
 const handleText = async (senderId: number, user: any, text: string) => {
   if (text.startsWith('/password')) {
@@ -11,10 +12,15 @@ const handleText = async (senderId: number, user: any, text: string) => {
     } else {
       await sendMessage(senderId, 'Invalid password.');
     }
-    return;
+  } else if (text.startsWith('/start')) {
+    await sendMessage(
+      senderId,
+      'Welcome to the Telegram bot! You can ask me anything.'
+    );
+    updateUser(senderId, { messages: [] });
+  } else {
+    await askChatbot(text, senderId, user);
   }
-
-  await sendMessage(senderId, `You said: ${text}`);
 };
 
 export const handleMessage = async (
